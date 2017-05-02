@@ -43,16 +43,20 @@ extern FILE* const stderr;
 /* Wrappers around stream write and read */
 __extern_inline size_t fread(void *buf, size_t size, size_t nmemb, FILE *stream)
 {
-    //if (stream->vmt->read == NULL) return 0;
-    //return stream->vmt->read(stream, buf, size*nmemb) / size;
-    return read(0, buf, size*nmemb) / size;
+    if (!stream || !stream->vmt)
+        return read(0, buf, size*nmemb) / size;
+
+    if (stream->vmt->read == NULL) return 0;
+    return stream->vmt->read(stream, buf, size*nmemb) / size;
 }
 
 __extern_inline size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *stream)
 {
-    //if (stream->vmt->write == NULL) return 0;
-    //return stream->vmt->write(stream, buf, size*nmemb) / size;
-    return write(0, buf, size*nmemb) / size;
+    if (!stream || !stream->vmt)
+        return write(0, buf, size*nmemb) / size;
+
+    if (stream->vmt->write == NULL) return 0;
+    return stream->vmt->write(stream, buf, size*nmemb) / size;
 }
 
 __extern_inline int fputs(const char *s, FILE *f)
