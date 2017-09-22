@@ -31,6 +31,7 @@ static malloc_unlock_t malloc_unlock = &malloc_unlock_nop;
 
 static inline void mark_block_dead(struct free_arena_header *ah)
 {
+    (void)ah;
 #ifdef DEBUG_MALLOC
 	ah->a.type = ARENA_TYPE_DEAD;
 #endif
