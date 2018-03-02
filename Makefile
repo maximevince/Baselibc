@@ -4,7 +4,7 @@ PREFIX ?= build
 TARGETS ?= target_cm0 target_cm3 target_cm4fpu
 TARGET_LIB = $(PREFIX)/lib/$(LIBNAME)
 CFLAGS += $(EXTRA_CFLAGS)
-CROSS_COMPILE ?= arm-none-eabi-
+CROSS_COMPILE ?= $(SNT_GCC)/arm-none-eabi-
 
 CC := $(CROSS_COMPILE)gcc
 LD := $(CROSS_COMPILE)gcc
