@@ -15,6 +15,7 @@ SIZE := $(CROSS_COMPILE)size
 OBJCOPY := $(CROSS_COMPILE)objcopy
 RM := rm -rf
 MKDIR := mkdir
+V := @
 
 # You can override the CFLAGS and C compiler externally,
 CFLAGS += -Iinclude -Os -ggdb -std=gnu11
