@@ -44,7 +44,7 @@ extern FILE* const stderr;
 __extern_inline size_t fread(void *buf, size_t size, size_t nmemb, FILE *stream)
 {
     if (!stream || !stream->vmt)
-        return read(0, buf, size*nmemb) / size;
+        return ((size_t)read(0, buf, size*nmemb)) / size;
 
     if (stream->vmt->read == NULL) return 0;
     return stream->vmt->read(stream, buf, size*nmemb) / size;
@@ -53,7 +53,7 @@ __extern_inline size_t fread(void *buf, size_t size, size_t nmemb, FILE *stream)
 __extern_inline size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *stream)
 {
     if (!stream || !stream->vmt)
-        return write(0, buf, size*nmemb) / size;
+        return ((size_t)write(0, buf, size*nmemb)) / size;
 
     if (stream->vmt->write == NULL) return 0;
     return stream->vmt->write(stream, buf, size*nmemb) / size;
@@ -61,18 +61,18 @@ __extern_inline size_t fwrite(const void *buf, size_t size, size_t nmemb, FILE *
 
 __extern_inline int fputs(const char *s, FILE *f)
 {
-	return fwrite(s, 1, strlen(s), f);
+	return (int)fwrite(s, 1, strlen(s), f);
 }
 
 __extern_inline int puts(const char *s)
 {
-	return fwrite(s, 1, strlen(s), stdout) + fwrite("\n", 1, 1, stdout);
+	return (int)fwrite(s, 1, strlen(s), stdout) + (int)fwrite("\n", 1, 1, stdout);
 }
 
 __extern_inline int fputc(int c, FILE *f)
 {
-	unsigned char ch = c;
-	return fwrite(&ch, 1, 1, f) == 1 ? ch : EOF;
+	unsigned char ch = (unsigned char)c;
+	return (int)fwrite(&ch, 1, 1, f) == 1 ? ch : EOF;
 }
 
 __extern char *fgets(char *, int, FILE *);
