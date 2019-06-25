@@ -66,7 +66,7 @@ __extern_inline int fputs(const char *s, FILE *f)
 
 __extern_inline int puts(const char *s)
 {
-	return (int)fwrite(s, 1, strlen(s), stdout) + (int)fwrite("\n", 1, 1, stdout);
+	return (int)fwrite(s, 1, strlen(s), 0) + (int)fwrite("\n", 1, 1, 0);
 }
 
 __extern_inline int fputc(int c, FILE *f)
@@ -83,7 +83,7 @@ __extern_inline int fgetc(FILE *f)
 }
 
 #define putc(c,f)  fputc((c),(f))
-#define putchar(c) fputc((c),stdout)
+#define putchar(c) fputc((c),0)
 #define getc(f) fgetc(f)
 #define getchar() fgetc(stdin)
 

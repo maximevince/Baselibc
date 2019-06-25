@@ -325,7 +325,7 @@ size_t tfp_format(FILE *putp, const char *fmt, va_list va)
         }
     }
  abort:;
- 
+
  return written;
 }
 
@@ -347,7 +347,7 @@ int printf(const char *fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
-    int rv = vfprintf(stdout, fmt, va);
+    int rv = vfprintf(0, fmt, va);
     va_end(va);
     return rv;
 }
