@@ -212,11 +212,11 @@ static unsigned putchw(FILE *putp, struct param *p)
     bf = p->bf;
     while ((ch = *bf++))
         written += putf(putp, ch);
-    
+
     return written;
 }
 
-size_t tfp_format(FILE *putp, const char *fmt, va_list va)
+int vfprintf(FILE *putp, const char *fmt, va_list va)
 {
     size_t written = 0;
     struct param p;
@@ -329,11 +329,6 @@ size_t tfp_format(FILE *putp, const char *fmt, va_list va)
  return written;
 }
 
-int vfprintf(FILE *f, const char *fmt, va_list va)
-{
-    return tfp_format(f, fmt, va);
-}
-
 int fprintf(FILE *f, const char *fmt, ...)
 {
     va_list va;
@@ -356,7 +351,7 @@ int vsnprintf(char *str, size_t size, const char *fmt, va_list va)
 {
     struct MemFile state;
     FILE *f = fmemopen_w(&state, str, size - 1);
-    tfp_format(f, fmt, va);
+    vfprintf(f, fmt, va);
     *(state.buffer) = '\0';
     return state.bytes_written;
 }

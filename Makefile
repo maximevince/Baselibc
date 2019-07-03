@@ -1,7 +1,8 @@
 LIBNAME ?= libc
 VARIANT ?= cm0
 PREFIX ?= build
-TARGETS ?= target_cm0 target_cm3 target_cm4fpu
+TARGETS ?= target_cm0
+#TARGETS ?= target_cm0 target_cm3 target_cm4fpu
 TARGET_LIB = $(PREFIX)/lib/$(LIBNAME)
 CFLAGS += $(EXTRA_CFLAGS)
 CROSS_COMPILE ?= $(SNT_GCC)/arm-none-eabi-
