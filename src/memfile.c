@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-size_t memfile_write(FILE *instance, const char *bp, size_t n)
+int memfile_write(FILE *instance, const char *bp, size_t n)
 {
     struct MemFile *f = (struct MemFile*)instance;
-    size_t i = 0;
-    
+    int i = 0;
+
     while (n--)
     {
         f->bytes_written++;
@@ -14,7 +14,7 @@ size_t memfile_write(FILE *instance, const char *bp, size_t n)
             i++;
         }
     }
-    
+
     return i;
 }
 

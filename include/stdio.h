@@ -11,7 +11,8 @@
 #include <stddef.h>
 #include <string.h>
 
-#include <unistd.h> /* for newlib read and write */
+int write(int fd, const char *bp, size_t n);
+int read(int fd, char *bp, size_t n);
 
 /* The File structure is designed to be compatible with ChibiOS/RT type
  * BaseSequentialStream.
@@ -22,8 +23,8 @@ typedef struct File FILE;
 
 struct File_methods
 {
-    size_t (*write)(FILE* instance, const char *bp, size_t n);
-    size_t (*read)(FILE* instance, char *bp, size_t n);
+    int (*write)(FILE* instance, const char *bp, size_t n);
+    int (*read)(FILE* instance, char *bp, size_t n);
 };
 
 struct File
