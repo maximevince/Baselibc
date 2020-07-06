@@ -5,7 +5,7 @@ TARGETS ?= target_cm0
 #TARGETS ?= target_cm0 target_cm3 target_cm4fpu
 TARGET_LIB = $(PREFIX)/lib/$(LIBNAME)
 CFLAGS += $(EXTRA_CFLAGS)
-CROSS_COMPILE ?= $(SNT_GCC9)arm-none-eabi-
+CROSS_COMPILE ?= $(SNT_GCC9)/arm-none-eabi-
 -include ../../toolchain/tc_config.mk
 
 CC := $(CROSS_COMPILE)gcc
