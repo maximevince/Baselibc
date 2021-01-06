@@ -79,7 +79,7 @@ static void uli2a(unsigned long int num, struct param *p)
     int n = 0;
     unsigned long int d = 1;
     char *bf = p->bf;
-    while (num / d >= p->base)
+    while (num / d >= (unsigned int)p->base)
         d *= p->base;
     while (d != 0) {
         int dgt = num / d;
@@ -108,7 +108,7 @@ static void ui2a(unsigned int num, struct param *p)
     int n = 0;
     unsigned int d = 1;
     char *bf = p->bf;
-    while (num / d >= p->base)
+    while (num / d >= (unsigned int)p->base)
         d *= p->base;
     while (d != 0) {
         int dgt = num / d;

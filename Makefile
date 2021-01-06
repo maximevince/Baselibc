@@ -25,6 +25,33 @@ CFLAGS += -fms-extensions -fmessage-length=0 -fstack-usage -fshort-enums -fshort
 CFLAGS += -ffreestanding -nostartfiles -ffunction-sections -fdata-sections
 CFLAGS += -fdiagnostics-color=always -fno-strict-aliasing -fno-builtin
 
+ifeq ($(PLATFORM),cortex-m3)
+  CC      = arm-none-eabi-gcc
+  AR      = arm-none-eabi-ar
+  CFLAGS += -mcpu=cortex-m3 -mthumb
+  CFLAGS += -fno-common -Os
+  CFLAGS += -ffunction-sections -fdata-sections
+else ifeq ($(PLATFORM),cortex-m0)
+  CC      = arm-none-eabi-gcc
+  AR      = arm-none-eabi-ar
+  CFLAGS += -mcpu=cortex-m0 -mthumb
+  CFLAGS += -fno-common -Os
+  CFLAGS += -ffunction-sections -fdata-sections
+else ifeq ($(PLATFORM),m68k-elf)
+  CC      = m68k-elf-gcc
+  AR      = m68k-elf-ar
+  CFLAGS += -mcpu=68000
+  CFLAGS += -fno-common -Os
+  CFLAGS += -ffunction-sections -fdata-sections
+  CFLAGS += -ffreestanding
+  CFLAGS += -DNO_UNISTD_H
+endif
+
+# With this, the makefile should work on Windows also.
+ifdef windir
+  RM = del
+endif
+
 # Just include all the source files in the build.
 CSRC = $(wildcard src/*.c)
 OBJS += $(addprefix ./$(PREFIX)/$(VARIANT)/,$(CSRC:.c=.o))
