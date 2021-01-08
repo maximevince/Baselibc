@@ -23,7 +23,7 @@ CFLAGS += -Iinclude -Os -ggdb -std=gnu11
 CFLAGS += -Wstrict-aliasing -Wall -Werror -Wno-comment -Wextra -Wno-ignored-qualifiers -Wstack-usage=256
 CFLAGS += -fms-extensions -fmessage-length=0 -fstack-usage -fshort-enums -fshort-wchar
 CFLAGS += -ffreestanding -nostartfiles -ffunction-sections -fdata-sections
-CFLAGS += -fdiagnostics-color=always -fno-strict-aliasing -fno-builtin
+CFLAGS += -fdiagnostics-color=always -fno-strict-aliasing -fno-builtin -DNO_UNISTD_H
 
 ifeq ($(PLATFORM),cortex-m3)
   CC      = arm-none-eabi-gcc
